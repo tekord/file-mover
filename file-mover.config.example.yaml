@@ -1,0 +1,29 @@
+environment:
+
+  SOFTWARE_ARCHIVE_PATH: D:\INSTALLERS
+  # or "~/INSTALLERS" on Linux-based OS
+
+rules:
+
+  - id: Telegram
+    destination: $(SOFTWARE_ARCHIVE_PATH)\Telegram
+    patterns:
+      - tsetup.(.+)\.exe$
+      - tportable.(.+)\.zip$
+
+  - id: VLC
+    destination: $(SOFTWARE_ARCHIVE_PATH)\VLC
+    patterns:
+      - vlc-(.+)\.exe$
+
+  - id: LibreOffice
+    destination: $(SOFTWARE_ARCHIVE_PATH)\LibreOffice
+    patterns:
+      - LibreOffice\_(.+)\.msi
+      - LibreOffice\_(.+)\.tar\.gz
+
+  - id: ShareX
+    destination: $(SOFTWARE_ARCHIVE_PATH)\ShareX
+    patterns:
+      - ShareX-(.+)-setup\.exe$
+      - ShareX-(.+)-portable\.zip$
