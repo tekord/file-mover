@@ -10,16 +10,16 @@ class VariableBag():
     def __init__(self):
         pass
 
-    def get(self, key, default=None):
+    def get(self, key: str, default=None) -> str:
         if key in os.environ:
             return os.environ[key]
 
         return default
 
-    def set(self, key, value):
+    def set(self, key: str, value):
         os.environ[key] = value
 
-    def substitute(self, input):
+    def substitute(self, input: str) -> str:
         result = input
 
         matches = re.finditer(r"\$\((\w+)\)", input)
@@ -36,7 +36,7 @@ class VariableBag():
         return result
 
 
-def format_source_destination_string(source, destination):
+def format_source_destination_string(source: str, destination: str) -> str:
     return "\"%s\" -> \"%s\"" % (source, destination)
 
 
@@ -63,6 +63,7 @@ for (n, v) in configuration["environment"].items():
 # Get a list of all files in source path
 files = glob.glob(args.path + "\\*")
 
+# Stores info about source files and target destinations
 queue = []
 
 for i in configuration["rules"]:
@@ -78,7 +79,7 @@ for i in configuration["rules"]:
                 break
 
         if found is True:
-            # Resolve destination file name
+            # Resolve the destination file name
             destination_file = os.path.join(variable_bag.substitute(
                 i["destination"]), os.path.basename(f))
 
@@ -88,6 +89,7 @@ for i in configuration["rules"]:
             })
 
 
+# Show affected files list
 for i in queue:
     print(format_source_destination_string(i["source"], i["destination"]))
 
